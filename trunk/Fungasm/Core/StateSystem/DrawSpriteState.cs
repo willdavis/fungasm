@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Fungasm.Graphics;
+using Fungasm.Science;
 using Fungasm.Tools;
 
 using Tao.OpenGl;
@@ -17,6 +18,7 @@ namespace Fungasm.Core
         Font _font;
         Text _fpsText;
         FPSCounter _fps;
+        Circle _circle;
 
         public DrawSpriteState(TextureManager textureManager, Renderer renderer)
         {
@@ -24,6 +26,7 @@ namespace Fungasm.Core
             _renderer = renderer;
             _fps = new FPSCounter();
             _font = new Font(_textureManager.Get("TimesFont"), FontParser.Parse("Fonts/timesFont.fnt"));
+            _circle = new Circle(Vector.Zero, 200);
         }
 
         #region IGameObject Members

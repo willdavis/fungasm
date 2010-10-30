@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,11 +59,15 @@
   <ItemGroup>
     <Compile Include="Core\ErrorManager.cs" />
     <Compile Include="Core\IGameObject.cs" />
+    <Compile Include="Core\InputManager.cs" />
+    <Compile Include="Core\InputTask.cs" />
+    <Compile Include="Core\MouseInput.cs" />
     <Compile Include="Core\ITask.cs" />
     <Compile Include="Core\KernelS.cs" />
     <Compile Include="Core\SettingsManager.cs" />
     <Compile Include="Core\StateManager.cs" />
     <Compile Include="Core\StateSystem\DrawSpriteState.cs" />
+    <Compile Include="Core\StateSystem\IntersectionTestState.cs" />
     <Compile Include="Core\StateSystem\SplashScreenState.cs" />
     <Compile Include="Core\StateSystem\TitleMenuState.cs" />
     <Compile Include="Core\Timer.cs" />
@@ -80,6 +85,8 @@
     <Compile Include="Graphics\Texture.cs" />
     <Compile Include="Graphics\TextureManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Science\Circle.cs" />
+    <Compile Include="Science\Rectangle.cs" />
     <Compile Include="Science\Singleton.cs" />
     <Compile Include="Science\Vector.cs" />
     <Compile Include="Tools\FPSCounter.cs" />

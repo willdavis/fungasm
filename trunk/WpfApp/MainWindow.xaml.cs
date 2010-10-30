@@ -25,6 +25,8 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MouseInput _input = new MouseInput();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,11 +36,14 @@ namespace WpfApp
                 Console.WriteLine("Unable to initialise Error Log files.");
             
             VideoTask video = new VideoTask();
+            InputTask task = new InputTask();
             video.Init(openGLControl);
+            task.Init(this, _input, openGLControl);
 
             Setup2DGraphics(this.ActualWidth, this.ActualHeight);
 
             KernelS.Instance.AddTask(video);
+            KernelS.Instance.AddTask(task);
             Renderer _renderer = new Renderer();
 
             // Init DevIl
@@ -75,6 +80,13 @@ namespace WpfApp
             Gl.glOrtho(-halfWidth, halfWidth, -halfHeight, halfHeight, -100, 100);
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
             Gl.glLoadIdentity();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            StateManager.Instance.AddState("CircleTest", new IntersectionTestState(_input, openGLControl));
+            StateManager.Instance.ChangeState("CircleTest");
+            e.Handled = true;
         }
     }
 }

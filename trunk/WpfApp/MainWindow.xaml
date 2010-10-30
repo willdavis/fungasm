@@ -11,14 +11,6 @@
         <WindowsFormsHost Grid.Row="0" ClipToBounds="True">
             <tao:SimpleOpenGlControl x:Name="openGLControl" />
         </WindowsFormsHost>
-        <Button Grid.Row="1" Content="Push Buttan" Foreground="OrangeRed" FontSize="26">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="Blue" Offset="0.30"/>
-                    <GradientStop Color="Yellow" Offset="0.50"/>
-                    <GradientStop Color="Green" Offset="0.70"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button Grid.Row="1" Content="Toggle Intersection Tests" Foreground="OrangeRed" FontSize="26" Click="Button_Click" />
     </Grid>
 </Window>

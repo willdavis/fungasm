@@ -36,7 +36,7 @@ namespace Fungasm.Core
         public void AddState(String stateID, IGameObject state)
         {
             if (Exists(stateID))
-                throw new InvalidOperationException();
+                throw new System.ApplicationException(string.Format("{0} is already the current state", stateID));
 
             _stateMap.Add(stateID, state);
         }

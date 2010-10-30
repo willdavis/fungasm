@@ -7,13 +7,13 @@ namespace Fungasm.Core
 {
     public interface ITask
     {
-        bool Start();
-        void OnSuspend();
-        void Update(double elapsedTime);
-        void OnResume();
-        void Stop();
-
         bool CanKill { get; set; }
         Int32 Priority { get; set; }
+
+        void Update(double elapsedTime);
+        bool Start();
+        void OnSuspend();
+        void OnResume();
+        void Stop();
     }
 }
