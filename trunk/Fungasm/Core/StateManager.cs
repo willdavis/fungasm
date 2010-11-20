@@ -9,8 +9,8 @@ namespace Fungasm.Core
 {
     public class StateManager : Singleton<StateManager>, ITask
     {
-        private IGameObject _currentState = null;
-        private Dictionary<String, IGameObject> _stateMap = new Dictionary<string, IGameObject>();
+        private IRenderable _currentState = null;
+        private Dictionary<String, IRenderable> _stateMap = new Dictionary<string, IRenderable>();
 
         private bool _canKill = false;
         private int _priority = 10;
@@ -33,7 +33,7 @@ namespace Fungasm.Core
             _currentState.Render();
         }
 
-        public void AddState(String stateID, IGameObject state)
+        public void AddState(String stateID, IRenderable state)
         {
             if (Exists(stateID))
                 throw new System.ApplicationException(string.Format("{0} is already the current state", stateID));

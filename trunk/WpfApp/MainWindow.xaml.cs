@@ -40,7 +40,7 @@ namespace WpfApp
             video.Init(openGLControl);
             task.Init(this, _input, openGLControl);
 
-            Setup2DGraphics(this.ActualWidth, this.ActualHeight);
+            Setup2DGraphics(openGLControl.Width, openGLControl.Height);
 
             KernelS.Instance.AddTask(video);
             KernelS.Instance.AddTask(task);
@@ -52,13 +52,15 @@ namespace WpfApp
             Ilut.ilutInit();
             Ilut.ilutRenderer(Ilut.ILUT_OPENGL);
 
-            _textureManager.LoadTexture("testTexture", "dilbert-02.jpg");
             _textureManager.LoadTexture("GayRoss", "testTextureZOMG.tif");
             _textureManager.LoadTexture("fontTest", "Fonts/test_0.tga");
             _textureManager.LoadTexture("TimesFont", "Fonts/timesFont_0.tga");
+            _textureManager.LoadTexture("dilbert", "dilbert-02.jpg");
+            _textureManager.LoadTexture("FungasmSplash", "FungasmSplash.png");
 
             StateManager.Instance.AddState("SplashScreen", new SplashScreenState(StateManager.Instance, _textureManager, _renderer));
             StateManager.Instance.AddState("SpriteTest", new DrawSpriteState(_textureManager, _renderer));
+            StateManager.Instance.AddState("test3D", new Test3DState());
 
             StateManager.Instance.ChangeState("SplashScreen");
 
@@ -81,11 +83,23 @@ namespace WpfApp
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
             Gl.glLoadIdentity();
         }
+        private void Setup3DGraphics(double width, double height)
+        {
+            double halfWidth = width / 2;
+            double halfHeight = height / 2;
+            Gl.glMatrixMode(Gl.GL_PROJECTION);
+            Gl.glLoadIdentity();
+            Glu.gluPerspective(90, 4 / 3, 1, 1000);
+            Gl.glMatrixMode(Gl.GL_MODELVIEW);
+            Gl.glLoadIdentity();
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StateManager.Instance.AddState("CircleTest", new IntersectionTestState(_input, openGLControl));
-            StateManager.Instance.ChangeState("CircleTest");
+            //StateManager.Instance.AddState("CircleTest", new IntersectionTestState(_input, openGLControl));
+            //StateManager.Instance.ChangeState("CircleTest");
+            Setup3DGraphics(this.ActualWidth, this.ActualHeight);
+            StateManager.Instance.ChangeState("test3D");
             e.Handled = true;
         }
     }

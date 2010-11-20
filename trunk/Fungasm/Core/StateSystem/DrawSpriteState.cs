@@ -11,28 +11,36 @@ using Tao.OpenGl;
 
 namespace Fungasm.Core
 {
-    public class DrawSpriteState : IGameObject
+    public class DrawSpriteState : IRenderable
     {
+        Tween _tween = new Tween(0, 256, 5);
+        Sprite _dilbert = new Sprite();
         TextureManager _textureManager;
         Renderer _renderer;
         Font _font;
         Text _fpsText;
         FPSCounter _fps;
-        Circle _circle;
 
         public DrawSpriteState(TextureManager textureManager, Renderer renderer)
         {
             _textureManager = textureManager;
             _renderer = renderer;
+            _dilbert.Texture = _textureManager.Get("GayRoss");
+            _dilbert.Position = new Vector(0,100,0);
             _fps = new FPSCounter();
             _font = new Font(_textureManager.Get("TimesFont"), FontParser.Parse("Fonts/timesFont.fnt"));
-            _circle = new Circle(Vector.Zero, 200);
         }
 
         #region IGameObject Members
 
         public void Update(double deltaTime)
         {
+            if (_tween.IsFinished != true)
+            {
+                _tween.Update(deltaTime);
+                _dilbert.Width = (float)_tween.Value;
+                _dilbert.Height = (float)_tween.Value;
+            }
             _fps.Process(deltaTime);
         }
 
@@ -43,6 +51,7 @@ namespace Fungasm.Core
 
             _fpsText = new Text("FPS: " + _fps.CurrentFPS.ToString("00.0"), _font, 100,-100);
             _renderer.DrawText(_fpsText);
+            _renderer.DrawSprite(_dilbert);
 
             //Draw anything left in the Batch before finishing the loop
             _renderer.Render();

@@ -5,35 +5,19 @@ using System.Text;
 using System.Windows;
 using System.Windows.Threading;
 
-using Fungasm.Science;
+using Tao.Platform.Windows;
 
 namespace Fungasm.Core
 {
-    public class InputManager : Singleton<InputManager>, ITask
+    public class InputTask : ITask
     {
-        #region Singleton Properties
-
-        private InputManager() { }
-
-        public static InputManager Instance
-        {
-            get
-            {
-                if (!Initialised)
-                    Init(new InputManager());
-
-                return UniqueInstance;
-            }
-        }
-
-        #endregion
-
-
         private MouseInput _input;
         private Window _windowHandle;
+        private SimpleOpenGlControl _openGlControl;
 
-        public bool Init(Window window, MouseInput input)
+        public bool Init(Window window, MouseInput input, SimpleOpenGlControl openGLCtrl)
         {
+            _openGlControl = openGLCtrl;
             _windowHandle = window;
             _input = input;
             return true;
@@ -60,14 +44,14 @@ namespace Fungasm.Core
             _windowHandle.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle,
                 (Action)(() => { _input.MousePosition = MouseInput.GetPosition(_windowHandle); }));
 
-            // Now use our point definition,
+            // Adjust mosue point to OpenGL Coordinates (center of SimpleOpenGLControl is <0,0>)
             Point adjustedMousePoint = new Point();
-            adjustedMousePoint.X = (float)_input.MousePosition.X - ((float)_windowHandle.ActualWidth / 2);
-            adjustedMousePoint.Y = ((float)_windowHandle.ActualHeight / 2) - (float)_input.MousePosition.Y;
+            adjustedMousePoint.X = (float)_input.MousePosition.X - ((float)_openGlControl.Width / 2);
+            adjustedMousePoint.Y = ((float)_openGlControl.Height / 2) - (float)_input.MousePosition.Y;
 
             _windowHandle.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle,
                 (Action)(() => { _input.MousePosition = adjustedMousePoint; }));
-
+            
         }
 
         public bool Start()

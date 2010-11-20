@@ -28,15 +28,6 @@ namespace Fungasm.Graphics
             if (sprite.VertexPositions.Length + _batchSize > MaxVertexNumber)
                 Draw();
 
-            //Only one texture can be used per Batch.
-            //Check the new Sprites texture and see if its different
-            if (sprite.Texture.Id != _currentTexture.Id)
-            {
-                Console.WriteLine("new texture detected in Batch");
-                _currentTexture.Id = sprite.Texture.Id;
-                Draw();
-            }
-
             for (int i = 0; i < sprite.VertexPositions.Length; i++)
             {
                 _vertexPositions[_batchSize + i] = sprite.VertexPositions[i];

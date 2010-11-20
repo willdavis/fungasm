@@ -38,7 +38,7 @@ namespace Fungasm.Core
 
         private void ManageTasks(double deltaTime)
         {
-            //Console.WriteLine(deltaTime);
+            Console.WriteLine(1/deltaTime);
 
             //Update tasks
             for (int i = 0; i < _taskList.Count; i++)

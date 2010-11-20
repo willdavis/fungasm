@@ -34,7 +34,7 @@ namespace Fungasm.Science
         public void Draw()
         {
             // Determines how round the circle will appear.
-            int vertexAmount = 50;
+            int vertexAmount = 36;
             double twoPI = 2.0 * Math.PI;
             // A line loop connects all the vertices with lines
             // The last vertex is connected to the first vertex

@@ -7,7 +7,7 @@ using Tao.OpenGl;
 
 namespace Fungasm.Core
 {
-    public class TitleMenuState : IGameObject
+    public class TitleMenuState : IRenderable
     {
 
 

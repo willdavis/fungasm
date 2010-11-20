@@ -12,6 +12,7 @@ namespace Fungasm.Graphics
     public class Renderer
     {
         Batch _batch = new Batch();
+        int _currentTextureId = -1;
 
         public Renderer()
         {
@@ -29,7 +30,18 @@ namespace Fungasm.Graphics
 
         public void DrawSprite(Sprite sprite)
         {
-            _batch.AddSprite(sprite);
+            if (sprite.Texture.Id == _currentTextureId)
+            {
+                _batch.AddSprite(sprite);
+            }
+            else
+            {
+                _batch.Draw(); // Draw all with current texture
+                // Update texture info
+                _currentTextureId = sprite.Texture.Id;
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, _currentTextureId);
+                _batch.AddSprite(sprite);
+            }
         }
 
         public void DrawText(Text text)

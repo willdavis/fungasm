@@ -13,6 +13,12 @@ namespace Fungasm.Science
     {
         Vector BottomLeft { get; set; }
         Vector TopRight { get; set; }
+
+        public Vector Center 
+        {
+            get { return new Vector(TopRight.X - BottomLeft.X, TopRight.Y - BottomLeft.Y, 0); }
+        }
+
         Color _color = new Color(1, 1, 1, 1);
         public Color Color
         {

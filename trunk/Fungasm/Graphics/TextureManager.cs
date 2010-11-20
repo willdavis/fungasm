@@ -14,6 +14,9 @@ namespace Fungasm.Graphics
 
         public Texture Get(String name)
         {
+            if (!_textureDatabase.ContainsKey(name))
+                throw new KeyNotFoundException();
+
             return _textureDatabase[name];
         }
 
