@@ -64,7 +64,7 @@ namespace Fungasm.Core
         public void Execute()
         {
             _gameLoop = new Thread(new ThreadStart( () => { while (!_dispatcher.HasShutdownStarted) { ManageTasks(_timer.GetElapsedTime()); } }));
-            _gameLoop.Name = "GameLoopNIGGA";
+            _gameLoop.Name = "GameLoop";
             _gameLoop.IsBackground = true;
             _gameLoop.Priority = ThreadPriority.AboveNormal;
             _gameLoop.SetApartmentState(ApartmentState.STA);
