@@ -52,7 +52,6 @@ namespace WpfApp
             Ilut.ilutInit();
             Ilut.ilutRenderer(Ilut.ILUT_OPENGL);
 
-            _textureManager.LoadTexture("GayRoss", "testTextureZOMG.tif");
             _textureManager.LoadTexture("fontTest", "Fonts/test_0.tga");
             _textureManager.LoadTexture("TimesFont", "Fonts/timesFont_0.tga");
             _textureManager.LoadTexture("dilbert", "dilbert-02.jpg");
@@ -96,10 +95,10 @@ namespace WpfApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //StateManager.Instance.AddState("CircleTest", new IntersectionTestState(_input, openGLControl));
-            //StateManager.Instance.ChangeState("CircleTest");
-            Setup3DGraphics(this.ActualWidth, this.ActualHeight);
-            StateManager.Instance.ChangeState("test3D");
+            StateManager.Instance.AddState("CircleTest", new IntersectionTestState(_input, openGLControl));
+            StateManager.Instance.ChangeState("CircleTest");
+            //Setup3DGraphics(this.ActualWidth, this.ActualHeight);
+            //StateManager.Instance.ChangeState("test3D");
             e.Handled = true;
         }
     }
